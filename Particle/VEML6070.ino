@@ -64,7 +64,7 @@ void loop()
   }
 
   // Convert the data
-  float uvlight = data[0] * 256.0 + data[1];
+  uvlight = data[0] * 256.0 + data[1];
   
   // Output data to dashboard
   Particle.publish("UV Light of The Device : ", String(uvlight));
