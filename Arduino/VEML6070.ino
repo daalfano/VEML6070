@@ -12,61 +12,61 @@
 void setup()
 {
 	// Set variable
-  Particle.variable("i2cdevice", "VEML6070");
-  Particle.variable("uvlight", uvlight);
-  
+  	Particle.variable("i2cdevice", "VEML6070");
+  	Particle.variable("uvlight", uvlight);
+  	
 	// Initialise I2C communication as MASTER
 	Wire.begin();
 	// Initialise serial communication, set baud rate = 9600
 	Serial.begin(9600);
-
-  // Start I2C Transmission
-  Wire.beginTransmission(Addr);
-  // Select command register
-  // Integration time = 0.5T, shutdown mode disable 
-  Wire.write(0x02);
-  // Stop I2C Transmission
-  Wire.endTransmission();
+	
+  	// Start I2C Transmission
+  	Wire.beginTransmission(Addr);
+  	// Select command register
+  	// Integration time = 0.5T, shutdown mode disable 
+  	Wire.write(0x02);
+  	// Stop I2C Transmission
+  	Wire.endTransmission();
 	delay(300);
 }
 
 void loop() 
 {
 	unsigned int data[2];
- 
+ 	
 	// Start I2C Transmission
 	Wire.beginTransmission(Addr);
 	// Select data msb register
 	Wire.write(0x73);
 	// Stop I2C Transmission
-  Wire.endTransmission();
-  
+  	Wire.endTransmission();
+  	
 	// Request 1 byte of data
 	Wire.requestFrom(Addr, 1);
-  if(Wire.available() == 1)
-  {
-	  data[0] = Wire.read();
-  }
-  
+  	if(Wire.available() == 1)
+  	{
+		data[0] = Wire.read();
+  	}
+  	
 	// Start I2C Transmission
 	Wire.beginTransmission(Addr);
 	// Select data lsb register
 	Wire.write(0x71);
-  // Stop I2C Transmission
-  Wire.endTransmission();
-  
+  	// Stop I2C Transmission
+  	Wire.endTransmission();
+  	
 	// Request 1 byte of data
-  Wire.requestFrom(Addr, 1);
-  if(Wire.available() == 1)
-  {
-    data[1] = Wire.read();
-  }
-
+  	Wire.requestFrom(Addr, 1);
+  	if(Wire.available() == 1)
+  	{
+    		data[1] = Wire.read();
+  	}
+	
 	// Convert the data
 	float uvlight = data[0] * 256.0 + data[1];
   
 	// Output data to dashboard
-  Serial.print("UV Light Of The Device");
-  Serial.println(uvlight);
-  delay(1000);     
+  	Serial.print("UV Light Of The Device");
+  	Serial.println(uvlight);
+  	delay(1000);     
 }
