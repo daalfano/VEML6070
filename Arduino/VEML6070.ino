@@ -43,6 +43,8 @@ void loop()
   	
 	// Request 1 byte of data
 	Wire.requestFrom(Addr, 1);
+	
+	// Read 1 byte of data
   	if(Wire.available() == 1)
   	{
 		data[0] = Wire.read();
@@ -50,13 +52,15 @@ void loop()
   	
 	// Start I2C Transmission
 	Wire.beginTransmission(Addr);
-	// Select data lsb register
+	// Select data register
 	Wire.write(0x71);
   	// Stop I2C Transmission
   	Wire.endTransmission();
   	
 	// Request 1 byte of data
   	Wire.requestFrom(Addr, 1);
+  	
+  	// Read 1 byte of data
   	if(Wire.available() == 1)
   	{
     		data[1] = Wire.read();
@@ -65,7 +69,7 @@ void loop()
 	// Convert the data
 	float uvlight = data[0] * 256.0 + data[1];
   
-	// Output data to dashboard
+	// Output data to serial monitor
   	Serial.print("UV Light Of The Device");
   	Serial.println(uvlight);
   	delay(1000);     
