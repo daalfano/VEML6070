@@ -26,11 +26,11 @@ public class VEML6070
 		// Read 2 bytes of data
 		// uvlight msb, uvlight lsb
 		byte[] data = new byte[2];
-		data[0] = device.read(0x73);
-		data[1] = device.read(0x71);
+		data[0] = (byte)device.read(0x73);
+		data[1] = (byte)device.read(0x71);
 
 		// Convert the data
-		int uvlight = ((data[0] & 0xFF) * 256) + data[1] & 0xFF);
+		int uvlight = (((data[0] & 0xFF) * 256) + data[1] & 0xFF);
 
 		// Output data to screen
 		System.out.printf("UV Light of The Device : %d %n", uvlight);
