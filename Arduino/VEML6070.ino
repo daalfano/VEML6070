@@ -11,10 +11,6 @@
 
 void setup()
 {
-	// Set variable
-  	Particle.variable("i2cdevice", "VEML6070");
-  	Particle.variable("uvlight", uvlight);
-  	
 	// Initialise I2C communication as MASTER
 	Wire.begin();
 	// Initialise serial communication, set baud rate = 9600
