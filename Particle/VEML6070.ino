@@ -10,7 +10,7 @@
 // VEML6070 I2C address is 0x38(56)
 #define Addr 0x38
 
-float uvlight = 0;
+double uvlight = 0.0;
 void setup()
 {
   // Set variable
